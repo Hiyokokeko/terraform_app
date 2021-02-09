@@ -24,7 +24,7 @@ resource "aws_s3_bucket_public_access_block" "private" {
   restrict_public_buckets = true
 }
 
-#パブリックバケット
+# パブリックバケット
 resource "aws_s3_bucket" "public" {
   bucket = "public-pragmatic-terraform"
   acl    = "public-read"
@@ -34,5 +34,18 @@ resource "aws_s3_bucket" "public" {
     allowed_methods = ["GET"]
     allowed_headers = ["*"]
     max_age_seconds = 3000
+  }
+}
+
+# ログバケット
+resource "aws_s3_bucket" "alb_log" {
+  bucket = "alb-log-pragmatic-terraform"
+
+  lifecycle_rule {
+    enabled = true
+
+    expiration {
+      days = "180"
+    }
   }
 }
