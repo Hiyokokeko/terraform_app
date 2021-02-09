@@ -1,6 +1,6 @@
 # プライベートバケット
 resource "aws_s3_bucket" "private" {
-  bucket = "private-pragmatic-terraform" # バケット名は一意制約よ
+  bucket = "chinkibucket-private" # バケット名は一意制約よ
 
   versioning {
     enabled = true
@@ -26,7 +26,7 @@ resource "aws_s3_bucket_public_access_block" "private" {
 
 # パブリックバケット
 resource "aws_s3_bucket" "public" {
-  bucket = "public-pragmatic-terraform"
+  bucket = "chinkibucket-pubic"
   acl    = "public-read"
 
   cors_rule {
@@ -39,7 +39,7 @@ resource "aws_s3_bucket" "public" {
 
 # ログバケット
 resource "aws_s3_bucket" "alb_log" {
-  bucket = "alb-log-pragmatic-terraform"
+  bucket = "chinkibucker-alblog"
 
   lifecycle_rule {
     enabled = true
