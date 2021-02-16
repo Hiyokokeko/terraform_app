@@ -19,6 +19,7 @@
 #   policy     = data.aws_iam_policy_document.allow_describe_regions.json
 # }
 
+# ALBからS3へのアクセス権を設定するポリシードキュメント
 data "aws_iam_policy_document" "alb_log" {
   statement {
     effect    = "Allow"
