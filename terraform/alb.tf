@@ -45,3 +45,22 @@ resource "aws_lb_listener" "http" {
     }
   }
 }
+
+# https接続時のデフォルトアクション設定
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = aws_lb.example.arn
+  port              = "443"
+  protocol          = "HTTPS"
+  certificate_arn   = aws_acm_certificate.example.arn #SSL証明書の指定
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "これはHTTPSです"
+      status_code  = "200"
+    }
+  }
+}
