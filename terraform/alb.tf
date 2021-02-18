@@ -5,7 +5,7 @@ resource "aws_lb" "example" {
   internal = false
   idle_timeout = 60
   # 削除保護の設定
-  enable_deletion_protection = true
+  enable_deletion_protection = true #ALB削除時はdestroyコマンドする前にここをfalseにして一度apply
 
 # public_0とpublic_1で負荷分散
   subnets = [
