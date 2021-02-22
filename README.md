@@ -1,3 +1,4 @@
 本番環境用
 
 2/22 terraform init
+2/22 terraform apply test
