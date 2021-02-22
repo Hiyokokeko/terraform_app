@@ -13,6 +13,8 @@ resource "aws_s3_bucket" "private" {
       }
     }
   }
+  # 削除保護設定
+  force_destroy = true
 }
 
 # ブロックパブリックアクセス
@@ -35,6 +37,8 @@ resource "aws_s3_bucket" "public" {
     allowed_headers = ["*"]
     max_age_seconds = 3000
   }
+  # 削除保護設定
+  force_destroy = true
 }
 
 # ログバケット
@@ -48,6 +52,8 @@ resource "aws_s3_bucket" "alb_log" {
       days = "180"
     }
   }
+  # 削除保護設定
+  force_destroy = true
 }
 
 # バケットポリシー

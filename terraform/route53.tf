@@ -6,7 +6,7 @@ data "aws_route53_zone" "example" {
 # # ホストゾーンの作成
 # resource "aws_route53_zone" "test_example" {
 #   name = "test.example.com" # ここはあとで自分のドメインに
-}
+# }
 
 resource "aws_route53_record" "example" {
   zone_id = data.aws_route53_zone.example.zone_id
