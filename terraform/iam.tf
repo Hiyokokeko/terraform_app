@@ -1,6 +1,6 @@
-# provider "aws" {
-#   region = "ap-northeast-1"
-# }
+provider "aws" {
+  region = "ap-northeast-1"
+}
 
 # data "aws_iam_policy_document" "allow_describe_regions" {
 #   statement {
@@ -9,8 +9,6 @@
 #     resources = ["*"]
 #   }
 # }
-
-# # ここから下だけでいいのでは...
 
 # module "describe_regions_for_ec2" {
 #   source     = "./modules/iam_role"
