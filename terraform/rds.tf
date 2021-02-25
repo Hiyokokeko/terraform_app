@@ -24,3 +24,9 @@ resource "aws_db_option_group" "example" {
     option_name = "MARIADB_AUDIT_PLUGIN"
   }
 }
+
+# RDS配置サブネット
+resource "aws_db_subnet_group" "example" {
+  name       = "example"
+  subnet_ids = [aws_subnet.private_0.id, aws_subnet.private_1.id]
+}
