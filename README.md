@@ -12,3 +12,6 @@ destroyでは作成したs3バケットの中身が消せなかったので、�
 ### 2/27 terraform apply後にAWS CLIでパスワードの更新
 AWSのIAMで使用権限付与した後にコマンド aws configureで設定
 コマンド aws ssm put-parameter --name '/db/password' --type SecureString --value 'ここにパスワード' --overwrite
+
+### 2/27 バッチを更新したので再度applyし、CloudWatch Logsにてパスワードが登録されてるか確認
+コマンド aws logs filter-log-events --log-group-name /ecs-scheduled-tasks/example
