@@ -1,3 +1,4 @@
+# RDSパラメータグループ作成
 resource "aws_db_parameter_group" "example" {
   name   = "example"
   family = "mysql5.7"
@@ -10,5 +11,16 @@ resource "aws_db_parameter_group" "example" {
   parameter {
     name  = "character_set_server"
     value = "utf8mb4"
+  }
+}
+
+# RDSオプション
+resource "aws_db_option_group" "example" {
+  name                 = "example"
+  engine_name          = "mysql"
+  major_engine_version = "5.7"
+
+  option {
+    option_name = "MARIADB_AUDIT_PLUGIN"
   }
 }
