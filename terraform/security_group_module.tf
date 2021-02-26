@@ -42,3 +42,12 @@ module "nginx_sg" {
   port        = 80
   cidr_blocks = [aws_vpc.example.cidr_block]
 }
+
+# RDS(MySQL)用
+module "mysql_sg" {
+  source      = "./modules/security_group"
+  name        = "mysql-sg"
+  vpc_id      = aws_vpc.example.id
+  port        = 3306
+  cidr_blocks = [aws_vpc.example.cidr_block]
+}
