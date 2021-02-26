@@ -55,6 +55,7 @@ resource "aws_db_instance" "example" {
   port                       = 3306
   apply_immediately          = false
   vpc_security_group_ids     = [module.mysql_sg.security_group_id]
+  parameter_group_name       = aws_db_parameter_group.example.name
   option_group_name          = aws_db_option_group.example.name
   db_subnet_group_name       = aws_db_subnet_group.example.name
 
