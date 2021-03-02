@@ -57,3 +57,31 @@ resource "aws_codebuild_project" "example" {
     privileged_mode = true
   }
 }
+
+# CodePipelineで下記権限付与
+# ステージ間でデータを受け渡すためのS3操作権限
+# CodeBuild操作権限
+# ECSにDockerイメージをデプロイするためのECS操作権限
+# CodeBuildやECSにロールを渡すためのPassRole権限
+data "aws_iam_policy_document" "codepipeline" {
+  statement {
+    effect    = "Allow"
+    resources = ["*"]
+
+    actions = [
+      "s3:PutObject",
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+      "s3:GetBucketVersioning",
+      "codebuild:BatchGetBuilds",
+      "codebuild:StartBuild",
+      "ecs:DescribeServices",
+      "ecs:DescribeTaskDefinition",
+      "ecs:DescribeTasks",
+      "ecs:ListTasks",
+      "ecs:RegisterTaskDefinition",
+      "ecs:UpdateService",
+      "iam:PassRole",
+    ]
+  }
+}
