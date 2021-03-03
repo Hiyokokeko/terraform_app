@@ -178,3 +178,9 @@ resource "aws_codepipeline_webhook" "example" {
     match_equals = "refs/heads/{Branch}"
   }
 }
+
+# GitHubプロバイダの定義
+provider "github" {
+  organization = "Hiyokokeko"
+  token = var.GITHUB_TOKEN
+}
