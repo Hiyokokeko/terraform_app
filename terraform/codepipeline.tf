@@ -184,3 +184,17 @@ provider "github" {
   organization = "Hiyokokeko"
   token = var.GITHUB_TOKEN
 }
+
+# GitHub Webhookの定義
+resource "github_repository_webhook" "codepipeline" {
+  repository = "terraform_app"
+
+  configuration {
+    url          = aws_codepipeline_webhook.webhook.url
+    secret       = var.WEBHOOK_TOKEN
+    content_type = "json"
+    insecure_ssl = false
+  }
+
+  events = ["push"]
+}
