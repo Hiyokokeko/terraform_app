@@ -17,3 +17,7 @@ AWSのIAMで使用権限付与した後にコマンド aws configureで設定<br
 コマンド aws logs filter-log-events --log-group-name /ecs-scheduled-tasks/example
 
 ### 2/27 terraform destroy
+
+### 3/4 terraform apply & destroy test ok
+RDSとElastCacheは重いのでまだテストできていない<br>
+CodePipelineまではapplyは一応可能
