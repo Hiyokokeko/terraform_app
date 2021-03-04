@@ -1,3 +1,8 @@
+variable GITHUB_USER {}
+variable GITHUB_REPO {}
+variable GITHUB_BRANCH {}
+variable GITHUB_TOKEN {}
+variable WEBHOOK_TOKEN {}
 # CodeBuildで下記権限付与
 # ビルド出力アーティファクトを保存するためのS3操作権限
 # ビルドログを出力するためのCloudWatch Logs操作権限
@@ -94,8 +99,8 @@ module "codepipeline_role" {
 }
 
 # CodePipelineの作成
-resource "aws_codepipeline" "example" {
-  name     = "example"
+resource "aws_codepipeline" "codepipeline" {
+  name     = "codepipeline"
   role_arn = module.codepipeline_role.iam_role_arn
 
   stage {
@@ -163,9 +168,9 @@ resource "aws_codepipeline" "example" {
 }
 
 # CodePipeline Webhook
-resource "aws_codepipeline_webhook" "example" {
-  name            = "example"
-  target_pipeline = aws_codepipeline.example.name
+resource "aws_codepipeline_webhook" "webhook" {
+  name            = "webhook"
+  target_pipeline = aws_codepipeline.codepipeline.name
   target_action   = "Source"
   authentication  = "GITHUB_HMAC"
 
