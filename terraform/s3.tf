@@ -76,3 +76,18 @@ resource "aws_s3_bucket" "artifact" {
   # 削除保護設定
   force_destroy = true
 }
+
+# SSHレスオペレーション用ログ保存
+resource "aws_s3_bucket" "operation" {
+  bucket = "chinkibucket-operation"
+
+  lifecycle_rule {
+    enabled = true
+
+    expiration {
+      days = "180"
+    }
+  }
+  # 削除保護設定
+  force_destroy = true
+}
