@@ -91,18 +91,3 @@ resource "aws_s3_bucket" "operation" {
   # 削除保護設定
   force_destroy = true
 }
-
-# CloudWatchLogsストレージのデータを保存する用のバケット
-resource "aws_s3_bucket" "cloudwatch_logs" {
-  bucket = "chinkibucket-cloudwatch"
-
-  lifecycle_rule {
-    enabled = true
-
-    expiration {
-      days = "180"
-    }
-  }
-  # 削除保護設定
-  force_destroy = true
-}
