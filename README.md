@@ -41,3 +41,4 @@ ec2.tfでoutput指定した、operation_instance_idで出力されたec2-instanc
 
 % aws ssm start-session --target <ここにec2-instance-idを入れる> --document-name SSM-SessionManagerRunShell<br>
 
+### 3/8 terraform destroy
