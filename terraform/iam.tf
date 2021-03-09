@@ -134,3 +134,18 @@ module "kinesis_data_firehose_role" {
   identifier = "firehose.amazonaws.com"
   policy     = data.aws_iam_policy_document.kinesis_data_firehose.json
 }
+
+# CloudWatch Logs IAMロールのポリシードキュメントの定義
+data "aws_iam_policy_document" "cloudwatch_logs" {
+  statement {
+    effect    = "Allow"
+    actions   = ["firehose:*"]
+    resources = ["arn:aws:firehose:ap-northeast-1:*:*"]
+  }
+
+  statement {
+    effect    = "Allow"
+    actions   = ["iam:PassRole"]
+    resources = ["arn:aws:iam::*:role/cloudwatch-logs"]
+  }
+}
