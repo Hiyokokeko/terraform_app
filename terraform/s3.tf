@@ -91,3 +91,18 @@ resource "aws_s3_bucket" "operation" {
   # 削除保護設定
   force_destroy = true
 }
+
+# CloudWatch Logs永続化バケットの定義
+esource "aws_s3_bucket" "cloudwatch_logs" {
+  bucket = "chinkibucket-cloudwatch-logs-pragmatic-terraform"
+
+  lifecycle_rule {
+    enabled = true
+
+    expiration {
+      days = "180"
+    }
+  }
+  # 削除保護設定
+  force_destroy = true
+}
