@@ -93,7 +93,7 @@ resource "aws_s3_bucket" "operation" {
 }
 
 # CloudWatch Logs永続化バケットの定義
-esource "aws_s3_bucket" "cloudwatch_logs" {
+resource "aws_s3_bucket" "cloudwatch_logs" {
   bucket = "chinkibucket-cloudwatch-logs-pragmatic-terraform"
 
   lifecycle_rule {
