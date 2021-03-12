@@ -105,3 +105,55 @@ resource "aws_iam_instance_profile" "ec2_for_ssm" {
   name = "ec2-for-ssm"
   role = module.ec2_for_ssm_role.iam_role_name
 }
+
+# Kinesis Data Firehose用の操作権限
+data "aws_iam_policy_document" "kinesis_data_firehose" {
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "s3:AbortMultipartUpload",
+      "s3:GetBucketLocation",
+      "s3:GetObject",
+      "s3:ListBucket",
+      "s3:ListBucketMultipartUploads",
+      "s3:PutObject",
+    ]
+
+    resources = [
+      "arn:aws:s3:::${aws_s3_bucket.cloudwatch_logs.id}",
+      "arn:aws:s3:::${aws_s3_bucket.cloudwatch_logs.id}/*",
+    ]
+  }
+}
+
+# Kinesis Data Firehose IAMロールの定義
+module "kinesis_data_firehose_role" {
+  source     = "./modules/iam_role"
+  name       = "kinesis-data-firehose"
+  identifier = "firehose.amazonaws.com"
+  policy     = data.aws_iam_policy_document.kinesis_data_firehose.json
+}
+
+# CloudWatch Logs IAMロールのポリシードキュメントの定義
+data "aws_iam_policy_document" "cloudwatch_logs" {
+  statement {
+    effect    = "Allow"
+    actions   = ["firehose:*"]
+    resources = ["arn:aws:firehose:ap-northeast-1:*:*"]
+  }
+
+  statement {
+    effect    = "Allow"
+    actions   = ["iam:PassRole"]
+    resources = ["arn:aws:iam::*:role/cloudwatch-logs"]
+  }
+}
+
+# CloudWatch Logs IAMロールの定義
+module "cloudwatch_logs_role" {
+  source     = "./modules/iam_role"
+  name       = "cloudwatch-logs"
+  identifier = "logs.ap-northeast-1.amazonaws.com"
+  policy     = data.aws_iam_policy_document.cloudwatch_logs.json
+}
