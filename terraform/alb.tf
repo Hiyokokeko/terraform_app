@@ -1,20 +1,20 @@
 # ALBの定義
 resource "aws_lb" "example" {
-  name = "example"
+  name               = "example"
   load_balancer_type = "application"
-  internal = false
-  idle_timeout = 60
+  internal           = false
+  idle_timeout       = 60
   # 削除保護の設定
   enable_deletion_protection = false #ALB削除時はdestroyコマンドする前にここをfalseにして一度apply
 
-# public_0とpublic_1で負荷分散
+  # public_0とpublic_1で負荷分散
   subnets = [
     aws_subnet.public_0.id,
     aws_subnet.public_1.id,
   ]
 
   access_logs {
-    bucket = aws_s3_bucket.alb_log.id
+    bucket  = aws_s3_bucket.alb_log.id
     enabled = true
   }
 
@@ -25,6 +25,11 @@ resource "aws_lb" "example" {
   ]
   tags = {
     Name = "alb_example"
+  }
+
+  # ALBのDNS名を出力
+  output "alb_dns_name" {
+    value = aws_lb.example.dns_name
   }
 }
 

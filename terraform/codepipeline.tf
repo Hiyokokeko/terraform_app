@@ -187,7 +187,7 @@ resource "aws_codepipeline_webhook" "webhook" {
 # GitHubプロバイダの定義
 provider "github" {
   organization = "Hiyokokeko"
-  token = var.GITHUB_TOKEN
+  token        = var.GITHUB_TOKEN
 }
 
 # GitHub Webhookの定義
