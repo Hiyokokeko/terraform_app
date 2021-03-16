@@ -26,6 +26,11 @@ resource "aws_lb" "example" {
   tags = {
     Name = "alb_example"
   }
+
+  # ALBのDNS名を出力
+  output "alb_dns_name" {
+    value = aws_lb.example.dns_name
+  }
 }
 
 # リスナー
